@@ -111,6 +111,23 @@ override '_guess_columns' =>sub
     
 };
 
+sub BUILD
+{
+    my $self=shift;
+    
+    $self->_guess_columns unless $self->cols->using_columns;
+    
+    unless(scalar(keys %{$self->columns}) == 2 and scalar(grep{$_ eq "v1" or $_ eq "v2"}(keys %{$self->columns})) == 2)
+    {
+	confess "The only allowable column types are 'v1' and 'v2'";
+    }
+    
+    unless(ref $self->columns->{v1} eq ref "" and ref $self->columns->{v2} eq ref "")
+    {
+	confess "Only a single column of each of types 'v1' and 'v2' is allowed (no array refs)";
+    }
+}
+
 sub query
 {
     my $self=shift;
@@ -145,24 +162,6 @@ sub query
     return $query;
 }
 
-override '_get_data'=>sub
-{
-    my $self=shift;
-    my @columns;
-    
-    $self->_guess_columns unless $self->using_columns;
-    
-    if(@_)
-    {
-	@columns=grep{defined}map{$self->columns->{$_}}@_;
-    }
-    else
-    {
-	@columns = @{$self->columns->column_types};
-    }
-    
-    return $self->dbi->data(@columns,{query=>$self->query});
-};
 
 =head1 TODO
 

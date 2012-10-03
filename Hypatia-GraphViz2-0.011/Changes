@@ -1,6 +1,6 @@
-Revision history for {{$dist->name}}
+Revision history for Hypatia-GraphViz2
 
-{{$NEXT}}
+0.011     2012-10-03 13:53:39 America/Chicago
 
 - Refactored to allow an input_data attribute. Got rid of the overridden internal _get_data method
     (which, for reasons I can't fathom, were causing failed CPAN test reports).
