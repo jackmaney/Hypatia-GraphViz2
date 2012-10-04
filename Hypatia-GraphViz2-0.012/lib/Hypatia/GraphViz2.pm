@@ -1,6 +1,6 @@
 package Hypatia::GraphViz2;
 {
-  $Hypatia::GraphViz2::VERSION = '0.011';
+  $Hypatia::GraphViz2::VERSION = '0.012';
 }
 use Moose;
 use Moose::Util::TypeConstraints;
@@ -131,7 +131,7 @@ Hypatia::GraphViz2 - Hypatia Bindings for GraphViz2
 
 =head1 VERSION
 
-version 0.011
+version 0.012
 
 =head1 SYNOPSIS
 

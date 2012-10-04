@@ -12,7 +12,7 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "Hypatia Bindings for GraphViz2",
   "AUTHOR" => "Jack Maney <jack\@jackmaney.com>",
   "BUILD_REQUIRES" => {
-    "Hypatia" => 0,
+    "Hypatia" => "0.026",
     "Hypatia::DBI::Test::SQLite" => 0,
     "Scalar::Util" => 0,
     "Test::More" => 0,
@@ -34,7 +34,7 @@ my %WriteMakefileArgs = (
     "MooseX::Aliases" => 0,
     "namespace::autoclean" => 0
   },
-  "VERSION" => "0.011",
+  "VERSION" => "0.012",
   "test" => {
     "TESTS" => "t/*.t"
   }
