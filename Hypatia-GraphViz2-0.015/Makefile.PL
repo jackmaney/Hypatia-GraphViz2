@@ -12,7 +12,7 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "Hypatia Bindings for GraphViz2",
   "AUTHOR" => "Jack Maney <jack\@jackmaney.com>",
   "BUILD_REQUIRES" => {
-    "Hypatia" => "0.026",
+    "Hypatia" => 0,
     "Hypatia::DBI::Test::SQLite" => 0,
     "Scalar::Util" => 0,
     "Test::More" => 0,
@@ -27,14 +27,16 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Hypatia::GraphViz2",
   "PREREQ_PM" => {
-    "GraphViz2" => 0,
+    "Data::Dumper" => 0,
+    "GraphViz2" => "2.05",
+    "Hypatia" => "0.027",
     "Hypatia::Base" => 0,
     "Moose" => 0,
     "Moose::Util::TypeConstraints" => 0,
     "MooseX::Aliases" => 0,
     "namespace::autoclean" => 0
   },
-  "VERSION" => "0.012",
+  "VERSION" => "0.015",
   "test" => {
     "TESTS" => "t/*.t"
   }

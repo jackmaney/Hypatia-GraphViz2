@@ -75,7 +75,9 @@ sub graph
     my $self=shift;
     my $data_arg=shift;
 	
-    my $data=$self->_get_data(qw(v1 v2));
+    my $data=$self->_get_data("v1","v2",{query=>$self->query});
+
+	use Data::Dumper;print "\$data: " . Dumper($data) . "\n";
     
     my $graph=GraphViz2->new(global=>{directed=>$self->directed});
     
@@ -146,17 +148,21 @@ sub query
     
     if($self->dbi->has_query)
     {
-	$middle = $self->dbi->query;
+		$middle = $self->dbi->query;
     }
     else
     {
-	$middle = "select * from " . $self->dbi->table;
+		$middle = "select * from " . $self->dbi->table;
     }
     
-    my $query="select " . join(",",@columns) . " from ( " . $middle . " )a";
+	my ($v1,$v2) = ($self->columns->{v1},$self->columns->{v2});
+
+    my $query="select " . join(",",@columns) . " from ( " . $middle . " )a where ";
     
-    $query.=" where " . $self->columns->{v1} . " < " . $self->columns->{v2} unless($self->directed);
+
+	$query .= "( $v1 is not null or $v2 is not null ) ";
     
+    $query.= " or ( $v1 is not null and $v2 is not null and $v1 < $v2 )" unless($self->directed);
     $query .= " group by " . join(",",@columns) . " order by " . join(",",@columns);
     
     return $query;
